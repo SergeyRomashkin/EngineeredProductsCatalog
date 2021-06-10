@@ -1,0 +1,297 @@
+﻿<Window x:Class="EngineeredProductsCatalog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EngineeredProductsCatalog"
+        mc:Ignorable="d"
+        FontFamily="Calibri"
+        Loaded="Window_Loaded"
+        Title="Каталог стандартных изделий машиностроения" Height="600" Width="800">
+    <Grid Margin="16,0,16,16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        
+        <StackPanel Margin="0,0,8,16" Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <Label Padding="0,5,5,5">
+                    Поиск (все категории)
+                </Label>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="345"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Name="TextBoxGlobalSearch"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" Width="345" FontSize="18"
+                             Style="{StaticResource SearchTextbox}"
+                            >
+                    </TextBox>
+                    <Button Name="ButtonSearch"
+                        Grid.Column="1"
+                            Click="ButtonSearch_Click">
+                        <Image Source="imgs/search32_32.png" Width="22"></Image>
+                        
+                    </Button>
+                </Grid>
+
+
+
+
+                <Label Padding="0,5,5,5">
+                    Категория
+                </Label>
+                
+                <ComboBox Name="ComboBoxCategory0" 
+                          IsEditable="False"
+                          SelectionChanged="ComboBoxCategory0_SelectionChanged">
+                    <!--<ComboBoxItem IsSelected="False">
+                        <TextBlock Text="&lt;Все категории>"></TextBlock>
+                    </ComboBoxItem>-->
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Name="StackPanel1" 
+                        Orientation="Vertical" 
+                        Visibility="Collapsed">
+                <ComboBox Name="ComboBoxCategory1" 
+                          IsEditable="False"
+                          SelectionChanged="ComboBoxCategory1_SelectionChanged">
+                    <!--<ComboBoxItem IsSelected="False">
+                        <TextBlock></TextBlock>
+                    </ComboBoxItem>
+                    <TextBlock>Категория 1</TextBlock>
+                    <TextBlock>Категория 2</TextBlock>
+                    <TextBlock>Категория 3</TextBlock>-->
+                    <!--<ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>-->
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Name="StackPanel2" 
+                        Orientation="Vertical" 
+                        Visibility="Collapsed">
+                <ComboBox Name="ComboBoxCategory2" 
+                          IsEditable="False" SelectionChanged="ComboBoxCategory2_SelectionChanged">
+                    <!--<ComboBoxItem IsSelected="False" Selected="ComboBoxItem_Selected">
+                        <TextBlock Name="TextBlockCategory2Name">1</TextBlock>
+                    </ComboBoxItem>-->                    
+                </ComboBox>
+            </StackPanel>
+
+            <Label Padding="0,5,5,5">
+                Поиск в категории
+            </Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="345"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBox Name="TextBoxSearchInCategory"
+                            Grid.Column="0"
+                            HorizontalAlignment="Left" Width="345" FontSize="18"
+                            Style="{StaticResource SearchTextbox}">
+                </TextBox>
+                <Button Name="ButtonSearchInCategory"
+                        Grid.Column="1"
+                        Click="ButtonSearchInCategory_Click">
+                    <Image Source="imgs/search32_32.png" Width="22"></Image>
+                </Button>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonOpenFilters" Click="ButtonOpenFilters_Click" Style="{StaticResource NormalButton}"
+                    Margin="0,8,0,0" Width="80" Height="28" HorizontalAlignment="Left">
+                    Фильтры
+                </Button>
+                <TextBlock Name="TextBlockFiltersApplied" VerticalAlignment="Bottom" Height="18" Margin="8,0,0,0"
+                           Visibility="Hidden">
+                    Применены фильтры 
+                </TextBlock>
+            </StackPanel>
+
+            
+
+        </StackPanel>
+
+        <ListBox Name="ListBoxResults" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
+                 BorderBrush="LightBlue"
+                 Margin="0,0,8,0" SelectionChanged="ListBoxResults_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding name}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Name="StackPanelDetails" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+                    Margin="8,0,0,16" Visibility="Hidden">
+            <StackPanel>
+                <Label Name="LabelProductName" HorizontalContentAlignment="Center" Background="LightGray">
+                    Деталь
+                </Label>
+                <Grid Name="GridDetails">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+
+                <!--<Grid Name="GridDetailsSupplier">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Name="LabelDeals" Grid.ColumnSpan="2" Background="LightGray" HorizontalContentAlignment="Center">Поставщик</Label>
+
+                    --><!--<Label Grid.Row="1">Поставщик</Label>
+                    <Label Grid.Row="2">Веб-сайт</Label>
+                    <Label Grid.Row="3">E-mail</Label>
+                    <Label Grid.Row="4">Отдел продаж</Label>
+                    <Label Grid.Row="5">Менеджер по продажам</Label>
+                    <Label Grid.Row="6">Адрес</Label>
+
+                    <TextBox Name="TextBoxSupplierName" Height="22" Grid.Row="1" Grid.Column="1" IsReadOnly="True" ></TextBox>
+                    <TextBox Name="TextBoxSupplierWebsite" Height="22" Grid.Row="2" Grid.Column="1" IsReadOnly="True" ></TextBox>
+                    <TextBox Name="TextBoxSupplierEmail" Height="22" Grid.Row="3" Grid.Column="1" IsReadOnly="True"></TextBox>
+                    <TextBox Name="TextBoxSupplierSalesDep" Height="22" Grid.Row="4" Grid.Column="1" IsReadOnly="True"></TextBox>
+                    <TextBox Name="TextBoxSupplierSalesManager" Height="22" Grid.Row="5" Grid.Column="1" IsReadOnly="True"></TextBox>
+                    <TextBox Name="TextBoxSupplierAddress" Height="22" Grid.Row="6" Grid.Column="1" IsReadOnly="True"></TextBox>-->
+
+                    
+                    <!-- DO NOT USE -->
+                    <!--<TextBlock Height="22" Grid.Row="1" Grid.Column="1" Text="{Binding website}"></TextBlock>
+                    <TextBlock Height="22" Grid.Row="2" Grid.Column="1" Text="{Binding email_address}"></TextBlock>
+                    <TextBlock Height="22" Grid.Row="3" Grid.Column="1" Text="{Binding sales_department_phone_number}"></TextBlock>
+                    <TextBlock Height="22" Grid.Row="4" Grid.Column="1" Text="{Binding sales_manager_phone_number}"></TextBlock>
+                    <TextBlock Height="22" Grid.Row="5" Grid.Column="1" Text="{Binding mailing_address}"></TextBlock>--><!--
+                </Grid>-->
+
+                <Grid Name="GridDetailsSupplier">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Name="LabelDeals" Grid.ColumnSpan="2" Background="LightGray" HorizontalContentAlignment="Center">
+                        Предложения поставщиков
+                    </Label>
+                    
+                    <ListView Name="ListViewDeals" Grid.Row="1"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              Margin="-2,0,0,-4"
+                              SelectionChanged="ListViewDeals_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Header="Поставщик" Width="170"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=price}" Header="Цена, руб." Width="64" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=manufacture_time}" Header="Время изготовления, д." Width="135"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+                <Grid Name="GridDetailsBestSuppliers" Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0">Мин. цена</Label>
+                    <Label Grid.Row="2">Мин. время изготовления</Label>
+
+                    <ListBox Name="ListBoxMinPriceSuppliers" Grid.Column="0" Grid.Row="1" SelectionChanged="ListBoxMinPriceSuppliers_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                        <Run Text="{Binding price}"/>
+                                        <Run Text="руб., "/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding name}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ListBox Name="ListBoxMinManufactureTimeSuppliers" Grid.Column="0" Grid.Row="3" SelectionChanged="ListBoxMinManufactureTimeSuppliers_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                        <Run Text="{Binding manufacture_time}"/>
+                                        <Run Text="д., "/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding name}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!--<TextBlock Name="TextBlockMinPrice" Grid.Column="1" Grid.Row="0"></TextBlock>
+                    <TextBlock x:Name="TextBlockMinManufactureTime" Grid.Column="1" Grid.Row="1"></TextBlock>-->
+                </Grid>
+                
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Window>
